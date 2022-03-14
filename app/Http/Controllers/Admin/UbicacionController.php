@@ -7,6 +7,15 @@ use Illuminate\Http\Request;
 
 class UbicacionController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('permission:ver-ubicacion | crear-ubicacion | editar-ubicacion | borrar-ubicacion',['only'=>['index']]);
+        $this->middleware('permission:crear-ubicacion' ,['only'=>['create','store']]);
+        $this->middleware('permission:editar-ubicacion' ,['only'=>['edit','update']]);
+        $this->middleware('permission:borrar-ubicacion' ,['only'=>['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

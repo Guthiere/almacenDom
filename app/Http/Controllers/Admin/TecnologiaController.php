@@ -3,10 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Tecnologia;
 use Illuminate\Http\Request;
 
 class TecnologiaController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('permission:ver-tecnologia | crear-tecnologia | editar-tecnologia | borrar-tecnologia',['only'=>['index']]);
+        $this->middleware('permission:crear-tecnologia' ,['only'=>['create','store']]);
+        $this->middleware('permission:editar-tecnologia' ,['only'=>['edit','update']]);
+        $this->middleware('permission:borrar-tecnologia' ,['only'=>['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +25,8 @@ class TecnologiaController extends Controller
     public function index()
     {
         //
+        $tecnologias = Tecnologia::get();
+        return view('admin.tecnologia.index',compact('tecnologias'));
     }
 
     /**

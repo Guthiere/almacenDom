@@ -13,7 +13,7 @@
         <i class=" fas fa-user-lock"></i><span>Roles</span>
     </a>
 
-    <a class="nav-link" href="/">
+    <a class="nav-link" href="{{route('deptos.index')}}">
         <i class=" fas fa-building"></i><span>Departamentos</span>
     </a>
 
@@ -25,7 +25,7 @@
     <a class="nav-link" href="/">
         <i class=" fas fa-building"></i><span>Empleados</span>
     </a>
-    <a class="nav-link" href="/">
+    <a class="nav-link" href="{{route('tecnos.index')}}">
         <i class=" fas fa-building"></i><span>Tecnologias</span>
     </a>
 

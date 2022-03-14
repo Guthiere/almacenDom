@@ -4,18 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Cargo;
 
-class CargoController extends Controller
+class UbicacionController extends Controller
 {
-
-    function __construct()
-    {
-        $this->middleware('permission:ver-cargo | crear-cargo | editar-cargo | borrar-cargo',['only'=>['index']]);
-        $this->middleware('permission:crear-cargo' ,['only'=>['create','store']]);
-        $this->middleware('permission:editar-cargo' ,['only'=>['edit','update']]);
-        $this->middleware('permission:borrar-cargo' ,['only'=>['destroy']]);
-    }
     /**
      * Display a listing of the resource.
      *
@@ -24,8 +15,6 @@ class CargoController extends Controller
     public function index()
     {
         //
-        $cargos = Cargo::paginate(5);
-        return view('admin.cargos.index', compact('cargos'));
     }
 
     /**
@@ -36,7 +25,6 @@ class CargoController extends Controller
     public function create()
     {
         //
-        return view('admin.cargos.create');
     }
 
     /**
@@ -48,14 +36,6 @@ class CargoController extends Controller
     public function store(Request $request)
     {
         //
-        request()->validate([
-            'descripcion' => 'required',
-
-        ]);
-
-        Cargo::create($request->all());
-
-        return redirect()->route('cargos.index');
     }
 
     /**
@@ -75,10 +55,9 @@ class CargoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cargo $cargo)
+    public function edit($id)
     {
         //
-        return view('admin.cargos.edit',compact('cargo'));
     }
 
     /**
@@ -88,17 +67,9 @@ class CargoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cargo $cargo)
+    public function update(Request $request, $id)
     {
         //
-        request()->validate([
-            'descripcion' => 'required',
-        ]);
-
-        $cargo->update($request->all());
-
-        return redirect()->route('cargos.index');
-
     }
 
     /**
@@ -107,10 +78,8 @@ class CargoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cargo $cargo)
+    public function destroy($id)
     {
         //
-        $cargo->delete();
-        return redirect()->route('cargos.index');
     }
 }

@@ -9,7 +9,7 @@
     <a class="nav-link" href="{{route('usuarios.index')}}">
         <i class=" fas fa-users"></i><span>Usuarios</span>
     </a>
-    <a class="nav-link" href="/">
+    <a class="nav-link" href="/roles">
         <i class=" fas fa-user-lock"></i><span>Roles</span>
     </a>
 

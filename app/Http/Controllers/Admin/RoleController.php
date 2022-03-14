@@ -85,12 +85,12 @@ class RoleController extends Controller
         //
         $role = Role::find($role->id);
         $Permission = Permission::get();
-        $rolePermissions = DB::table('role_has_permissions')
-                            ->where('role_has_permissions.role_id',$role->id)
+        $rolePermissions = DB::table("role_has_permissions")
+                            ->where("role_has_permissions.role_id",$role->id)
                             ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
                             ->all();
 
-        return view('admin.roles.edit', compact('role','permission','rolePermission'));
+        return view('admin.roles.edit', compact('role','Permission','rolePermissions'));
     }
 
     /**
@@ -103,11 +103,15 @@ class RoleController extends Controller
     public function update(Request $request, Role $role)
     {
         //
-        $this->validate($request,['name'=>'required','permission'=>'required']);
+        $this->validate($request,[
+            'name'=>'required',
+            'permission'=>'required',
+        ]);
 
         $role = Role::find($role->id);
         $role->name= $request->input('name');
         $role->save();
+
         $role ->syncPermissions($request->input('permission'));
 
         return redirect()->route('roles.index');

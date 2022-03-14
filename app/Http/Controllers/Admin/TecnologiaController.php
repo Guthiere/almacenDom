@@ -37,6 +37,7 @@ class TecnologiaController extends Controller
     public function create()
     {
         //
+        return view('admin.tecnologia.create');
     }
 
     /**
@@ -48,6 +49,14 @@ class TecnologiaController extends Controller
     public function store(Request $request)
     {
         //
+        request()->validate([
+            'descTecnologia' => 'required',
+
+        ]);
+
+        Tecnologia::create($request->all());
+
+        return redirect()->route('tecnos.index');
     }
 
     /**
@@ -70,6 +79,8 @@ class TecnologiaController extends Controller
     public function edit($id)
     {
         //
+        $tecnologias = Tecnologia::find($id);
+        return view('admin.tecnologia.edit',compact('tecnologias'));
     }
 
     /**
@@ -82,6 +93,14 @@ class TecnologiaController extends Controller
     public function update(Request $request, $id)
     {
         //
+        request()->validate([
+            'descTecnologia' => 'required',
+
+        ]);
+
+        $tecnologias = Tecnologia::find($id)->update($request->all());
+
+        return redirect()->route('tecnos.index');
     }
 
     /**
@@ -93,5 +112,7 @@ class TecnologiaController extends Controller
     public function destroy($id)
     {
         //
+        Tecnologia::find($id)->delete();
+        return redirect()->route('tecnos.index');
     }
 }

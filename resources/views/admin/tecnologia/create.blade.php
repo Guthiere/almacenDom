@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Crear Departamentos</h3>
+            <h3 class="page__heading">Crear Tecnologia</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -23,13 +23,13 @@
                             </div>
                         @endif
 
-                    <form action="{{ route('deptos.store') }}" method="POST">
+                    <form action="{{ route('tecnos.store') }}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                   <label for="descDepartamento">Departamento</label>
-                                   <input type="text" name="descDepartamento" class="form-control">
+                                   <label for="descTecnologia">Tecnologia</label>
+                                   <input type="text" name="descTecnologia" class="form-control">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">

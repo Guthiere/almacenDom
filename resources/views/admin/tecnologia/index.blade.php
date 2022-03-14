@@ -13,7 +13,7 @@
 
 
                         @can('crear-blog')
-                        <a class="btn btn-warning" href="{{ route('deptos.create') }}">Nuevo</a>
+                        <a class="btn btn-warning" href="{{ route('tecnos.create') }}">Nuevo</a>
                         @endcan
 
                         <table class="table table-striped mt-2">
@@ -27,17 +27,17 @@
 
                             @foreach ($tecnologias as $tecnologia)
                             <tr>
-                                <td style="display: none;">{{ $departamento->id }}</td>
-                                <td>{{ $tecnologias->descTecnologia }}</td>
-                                <td>{{ $tecnologias->observacion }}</td>
+                                <td style="display: none;">{{ $tecnologia->id }}</td>
+                                <td>{{ $tecnologia->descTecnologia }}</td>
+                                <td>{{ $tecnologia->observacion }}</td>
                                 <td>
-                                    <form action="{{ route('deptos.destroy',$tecnologias->id) }}" method="POST">
-                                        @can('editar-departamento')
-                                        <a class="btn btn-info" href="{{ route('deptos.edit',$tecnologias->id) }}">Editar</a>
+                                    <form action="{{ route('tecnos.destroy',$tecnologia->id) }}" method="POST">
+                                        @can('editar-tecnologia')
+                                        <a class="btn btn-info" href="{{ route('tecnos.edit',$tecnologia->id) }}">Editar</a>
                                         @endcan
                                         @csrf
                                         @method('DELETE')
-                                        @can('borrar-departamento')
+                                        @can('borrar-tecnologia')
                                         <button type="submit" class="btn btn-danger">Borrar</button>
                                         @endcan
                                     </form>
@@ -50,7 +50,7 @@
 
                         <!-- Ubicamos la paginacion a la derecha -->
                         <div class="pagination justify-content-end">
-              
+
                         </div>
                         </div>
                     </div>

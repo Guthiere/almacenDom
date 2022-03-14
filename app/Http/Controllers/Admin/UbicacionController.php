@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ubicacion;
 use Illuminate\Http\Request;
 
 class UbicacionController extends Controller
@@ -24,6 +25,8 @@ class UbicacionController extends Controller
     public function index()
     {
         //
+        $ubicasiones = Ubicacion::paginate(5);
+        return view('admin.ubicasiones.index',compact('ubicasiones'));
     }
 
     /**
@@ -34,6 +37,7 @@ class UbicacionController extends Controller
     public function create()
     {
         //
+        return view('admin.ubicasiones.create');
     }
 
     /**
@@ -45,6 +49,14 @@ class UbicacionController extends Controller
     public function store(Request $request)
     {
         //
+        request()->validate([
+            'descUbicacion' => 'required',
+
+        ]);
+
+        Ubicacion::create($request->all());
+
+        return redirect()->route('ubic.index');
     }
 
     /**
@@ -67,6 +79,8 @@ class UbicacionController extends Controller
     public function edit($id)
     {
         //
+        $ubicasiones = Ubicacion::find($id);
+        return view('admin.ubicasiones.edit',compact('ubicasiones'));
     }
 
     /**
@@ -79,6 +93,14 @@ class UbicacionController extends Controller
     public function update(Request $request, $id)
     {
         //
+        request()->validate([
+            'descUbicacion' => 'required',
+
+        ]);
+        $ubicasiones = Ubicacion::find($id)->update($request->all());
+
+        return redirect()->route('ubic.index');
+
     }
 
     /**
@@ -90,5 +112,7 @@ class UbicacionController extends Controller
     public function destroy($id)
     {
         //
+        Ubicacion::find($id)->delete();
+        return redirect()->route('ubic.index');
     }
 }

@@ -3,19 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Departamento;
 use Illuminate\Http\Request;
 
-class DepartamentoController extends Controller
+class EmpleadoController extends Controller
 {
-
-    function __construct()
-    {
-        $this->middleware('permission:ver-departamento | crear-departamento | editar-departamento | borrar-departamento',['only'=>['index']]);
-        $this->middleware('permission:crear-departamento' ,['only'=>['create','store']]);
-        $this->middleware('permission:editar-departamento' ,['only'=>['edit','update']]);
-        $this->middleware('permission:borrar-departamento' ,['only'=>['destroy']]);
-    }
     /**
      * Display a listing of the resource.
      *
@@ -24,8 +15,6 @@ class DepartamentoController extends Controller
     public function index()
     {
         //
-        $departamentos = Departamento::paginate(5);
-        return view('admin.departamentos.index', compact('departamentos'));
     }
 
     /**
@@ -36,7 +25,6 @@ class DepartamentoController extends Controller
     public function create()
     {
         //
-        return view('admin.departamentos.create');
     }
 
     /**
@@ -48,14 +36,6 @@ class DepartamentoController extends Controller
     public function store(Request $request)
     {
         //
-        request()->validate([
-            'descDepartamento' => 'required',
-
-        ]);
-
-        Departamento::create($request->all());
-
-        return redirect()->route('deptos.index');
     }
 
     /**
@@ -78,8 +58,6 @@ class DepartamentoController extends Controller
     public function edit($id)
     {
         //
-        $departamentos = Departamento::find($id);
-        return view('admin.departamentos.edit',compact('departamentos'));
     }
 
     /**
@@ -92,14 +70,6 @@ class DepartamentoController extends Controller
     public function update(Request $request, $id)
     {
         //
-        request()->validate([
-            'descDepartamento' => 'required',
-
-        ]);
-
-        $departamento = Departamento::find($id)->update($request->all());
-
-        return redirect()->route('deptos.index');
     }
 
     /**
@@ -111,7 +81,5 @@ class DepartamentoController extends Controller
     public function destroy($id)
     {
         //
-        Departamento::find($id)->delete();
-        return redirect()->route('deptos.index');
     }
 }
